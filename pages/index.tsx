@@ -2,6 +2,7 @@ import { InferGetStaticPropsType } from "next";
 import getAllProducts from "@framework/product/get-all-products";
 import { getConfig } from "@framework/api/config";
 import { Layout } from "@components/common";
+import { ProductCard } from "@components/product";
 
 //import play from "../playground";
 export async function getStaticProps() {
@@ -22,7 +23,9 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
-      {JSON.stringify(products)} {products[0].name}
+      {products.slice(0, 3).map((product) => (
+        <ProductCard product={product} key={product.id} />
+      ))}
     </div>
   );
 }
